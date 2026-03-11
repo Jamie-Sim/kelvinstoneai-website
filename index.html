@@ -744,6 +744,9 @@
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
+    select.form-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(24,20,34,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
+    select.form-input option { color: var(--ink); background: #fff; }
+    textarea.form-input { resize: vertical; min-height: 96px; line-height: 1.6; }
     .form-input::placeholder { color: var(--ink-muted); }
     .form-input:focus {
       border-color: var(--blue);
@@ -847,6 +850,7 @@
       font-weight: 600;
     }
 
+
     /* ============================================================
        FOOTER
     ============================================================ */
@@ -855,7 +859,21 @@
       color: rgba(240,234,222,0.88);
       padding: var(--sp-10) 0 var(--sp-6);
       border-top: 4px solid var(--blue);
+      position: relative;
+      overflow: hidden;
     }
+    .footer-cathedral {
+      position: absolute;
+      right: -4%;
+      top: -8%;
+      height: 118%;
+      width: auto;
+      filter: grayscale(100%);
+      opacity: 0.055;
+      pointer-events: none;
+      object-fit: cover;
+    }
+    footer .wrap { position: relative; z-index: 1; }
 
     .footer-grid {
       display: grid;
@@ -1245,6 +1263,7 @@
       </div>
     </section>
 
+
     <!-- ============================================================
          CTA SECTION
     ============================================================ -->
@@ -1255,15 +1274,34 @@
           <h2>Claim your free<br><em>automation audit</em></h2>
           <p>Tell us about your business and we'll show you exactly where you're losing leads — and how to stop it. No sales pressure. No obligation.</p>
 
-          <form class="cta-form" onsubmit="return false;">
+          <form id="audit-form" class="cta-form" onsubmit="submitAuditForm(event)">
             <div class="form-row">
-              <input class="form-input" type="text"  placeholder="Your name"        autocomplete="name" />
-              <input class="form-input" type="email" placeholder="Email address"    autocomplete="email" />
+              <input class="form-input" type="text"  name="name"         placeholder="Your name"        autocomplete="name"         required />
+              <input class="form-input" type="email" name="email"        placeholder="Email address"    autocomplete="email"        required />
             </div>
-            <input class="form-input" type="tel"  placeholder="Phone number (UK)" autocomplete="tel" />
-            <input class="form-input" type="text" placeholder="Business name"      autocomplete="organization" />
-            <button type="submit" class="form-submit">Book My Free Audit →</button>
-            <p class="form-note">We'll be in touch within one business day. No spam, ever.</p>
+            <input class="form-input" type="tel"  name="phone"        placeholder="Phone number (UK)" autocomplete="tel" />
+            <input class="form-input" type="text" name="business_name" placeholder="Business name"    autocomplete="organization" />
+            <div class="form-row">
+              <select class="form-input" name="business_type">
+                <option value="" disabled selected>Business type</option>
+                <option>Plumber</option>
+                <option>Electrician</option>
+                <option>Builder / General Contractor</option>
+                <option>Roofer</option>
+                <option>Heating Engineer</option>
+                <option>Letting Agent</option>
+                <option>Estate Agent</option>
+                <option>Property Manager</option>
+                <option>Cleaning</option>
+                <option>Removals</option>
+                <option>Other Trades</option>
+                <option>Other Property</option>
+              </select>
+              <input class="form-input" type="text" name="location" placeholder="Your location (city / town)" autocomplete="address-level2" />
+            </div>
+            <textarea class="form-input" name="ideal_outcome" placeholder="Ideal outcome — what would success look like for your business?"></textarea>
+            <button type="submit" class="form-submit" id="audit-submit">Book My Free Audit →</button>
+            <p class="form-note" id="form-status">We'll be in touch within one business day. No spam, ever.</p>
           </form>
         </div>
       </div>
@@ -1306,10 +1344,12 @@
 
   </main>
 
+
   <!-- ============================================================
        FOOTER
   ============================================================ -->
   <footer>
+    <img src="brand_assets/Glasgow_Image_01.jpg" alt="" class="footer-cathedral" />
     <div class="wrap">
       <div class="footer-grid">
         <div class="footer-brand">
@@ -1351,6 +1391,35 @@
   </footer>
 
   <script>
+    // Audit form → n8n webhook
+    async function submitAuditForm(e) {
+      e.preventDefault();
+      const form    = document.getElementById('audit-form');
+      const btn     = document.getElementById('audit-submit');
+      const status  = document.getElementById('form-status');
+      const data    = Object.fromEntries(new FormData(form));
+
+      btn.disabled    = true;
+      btn.textContent = 'Sending…';
+
+      try {
+        await fetch('https://kelvinstoneai.app.n8n.cloud/webhook/448be9fd-bf50-4fe0-bf59-5354f1c7f5ca', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        form.reset();
+        btn.textContent      = 'Request Sent ✓';
+        status.textContent   = "Thanks! We'll be in touch within one business day.";
+        status.style.color   = 'var(--blue)';
+      } catch (err) {
+        btn.disabled         = false;
+        btn.textContent      = 'Book My Free Audit →';
+        status.textContent   = 'Something went wrong — please try again or email jamie@kelvinstone.ai';
+        status.style.color   = 'var(--terra)';
+      }
+    }
+
     // Navbar scroll
     const nav = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
