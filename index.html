@@ -1279,10 +1279,10 @@
               <input class="form-input" type="text"  name="name"         placeholder="Your name"        autocomplete="name"         required />
               <input class="form-input" type="email" name="email"        placeholder="Email address"    autocomplete="email"        required />
             </div>
-            <input class="form-input" type="tel"  name="phone"        placeholder="Phone number (UK)" autocomplete="tel" />
-            <input class="form-input" type="text" name="business_name" placeholder="Business name"    autocomplete="organization" />
+            <input class="form-input" type="tel"  name="phone"        placeholder="Phone number (UK)" autocomplete="tel"          required />
+            <input class="form-input" type="text" name="business_name" placeholder="Business name"   autocomplete="organization" required />
             <div class="form-row">
-              <select class="form-input" name="business_type">
+              <select class="form-input" name="business_type" required>
                 <option value="" disabled selected>Business type</option>
                 <option>Plumber</option>
                 <option>Electrician</option>
@@ -1297,9 +1297,9 @@
                 <option>Other Trades</option>
                 <option>Other Property</option>
               </select>
-              <input class="form-input" type="text" name="location" placeholder="Your location (city / town)" autocomplete="address-level2" />
+              <input class="form-input" type="text" name="location" placeholder="Your location (city / town)" autocomplete="address-level2" required />
             </div>
-            <textarea class="form-input" name="ideal_outcome" placeholder="Ideal outcome — what would success look like for your business?"></textarea>
+            <textarea class="form-input" name="ideal_outcome" placeholder="Ideal outcome — what would success look like for your business? (optional)"></textarea>
             <button type="submit" class="form-submit" id="audit-submit">Book My Free Audit →</button>
             <p class="form-note" id="form-status">We'll be in touch within one business day. No spam, ever.</p>
           </form>
