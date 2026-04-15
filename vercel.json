@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "onboarding.kelvinstone.ai" }],
+      "destination": "/onboarding.html"
+    }
+  ]
+}

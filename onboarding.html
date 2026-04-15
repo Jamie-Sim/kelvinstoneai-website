@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kelvinstone AI — New client onboarding. Tell us about your business and let's get started." />
+  <title>Get Started — Kelvinstone AI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — identical to main site
+    ============================================================ */
+    :root {
+      --parchment:       #f0eade;
+      --parchment-mid:   #e6dfcf;
+      --parchment-dark:  #d9d0bc;
+      --ink:             #181422;
+      --ink-mid:         rgba(24,20,34,0.60);
+      --ink-muted:       rgba(24,20,34,0.38);
+      --ink-subtle:      rgba(24,20,34,0.16);
+      --blue:            #3232AE;
+      --blue-mid:        #8282ED;
+      --blue-light:      #BADEFC;
+      --terra:           #b84c38;
+      --terra-dark:      #7a2e1f;
+      --terra-hover:     #c95843;
+      --rule:            rgba(24,20,34,0.10);
+      --rule-mid:        rgba(24,20,34,0.18);
+
+      --sp-1:8px;  --sp-2:16px; --sp-3:24px; --sp-4:32px;
+      --sp-5:40px; --sp-6:48px; --sp-8:64px; --sp-10:80px;
+      --sp-12:96px; --sp-16:128px;
+    }
+
+    /* ============================================================
+       BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: var(--parchment);
+      color: var(--ink);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ============================================================
+       FILM GRAIN
+    ============================================================ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.15'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+    .wrap-narrow {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+
+    /* ============================================================
+       NAV — identical to main site
+    ============================================================ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 22px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s ease, padding 0.35s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(240,234,222,0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 14px 56px;
+      border-bottom-color: var(--rule);
+      box-shadow: 0 2px 32px rgba(24,20,34,0.06);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+    }
+    .nav-logo { height: 48px; width: auto; display: block; mix-blend-mode: multiply; }
+    .nav-brand-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--ink-mid);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+    .nav-back:hover { color: var(--ink); }
+    .nav-back svg { transition: transform 0.22s ease; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+
+    /* ============================================================
+       INTRO SECTION
+    ============================================================ */
+    #intro {
+      padding-top: calc(var(--sp-16) + var(--sp-4));
+      padding-bottom: var(--sp-8);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      margin-bottom: var(--sp-3);
+    }
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--rule-mid);
+    }
+
+    .intro-h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: var(--sp-3);
+      max-width: 640px;
+    }
+    .intro-h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .intro-sub {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--ink-mid);
+      line-height: 1.72;
+      max-width: 540px;
+      margin-bottom: var(--sp-5);
+    }
+
+    .intro-accent-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--terra);
+      border-radius: 2px;
+      margin-bottom: var(--sp-4);
+    }
+
+    /* Step indicators */
+    .step-chips {
+      display: flex;
+      gap: var(--sp-2);
+      flex-wrap: wrap;
+    }
+    .step-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(24,20,34,0.05);
+      border: 1px solid var(--rule);
+      border-radius: 100px;
+      padding: 6px 14px 6px 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--ink-mid);
+    }
+    .step-chip-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       DIVIDER
+    ============================================================ */
+    .section-rule {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin: 0;
+    }
+
+    /* ============================================================
+       FORM SECTION
+    ============================================================ */
+    #form-section {
+      padding: var(--sp-10) 0 var(--sp-16);
+    }
+
+    .form-wrapper {
+      background: rgba(255,255,255,0.38);
+      border: 1px solid rgba(24,20,34,0.08);
+      border-radius: 16px;
+      padding: var(--sp-6) var(--sp-8);
+      box-shadow:
+        0 2px 4px rgba(24,20,34,0.03),
+        0 8px 32px rgba(24,20,34,0.07),
+        0 24px 64px rgba(24,20,34,0.05);
+    }
+
+    /* Tally iframe */
+    .tally-container {
+      min-height: 600px;
+    }
+    .tally-container iframe {
+      display: block;
+      width: 100%;
+      border: none;
+    }
+
+    /* ============================================================
+       TRUST STRIP
+    ============================================================ */
+    .trust-strip {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      margin-top: var(--sp-4);
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+    .trust-item svg {
+      flex-shrink: 0;
+      color: var(--blue);
+    }
+    .trust-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--rule);
+    }
+
+    /* ============================================================
+       FOOTER — identical to main site
+    ============================================================ */
+    footer {
+      background: var(--ink);
+      color: rgba(240,234,222,0.88);
+      padding: var(--sp-10) 0 var(--sp-6);
+      border-top: 4px solid var(--blue);
+      position: relative;
+      overflow: hidden;
+    }
+    footer .wrap { position: relative; z-index: 1; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--sp-8);
+      margin-bottom: var(--sp-8);
+    }
+    .footer-brand-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: rgba(240,234,222,0.95);
+      letter-spacing: -0.02em;
+    }
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: rgba(240,234,222,0.45);
+      line-height: 1.72;
+      margin-top: 12px;
+      max-width: 260px;
+    }
+    .footer-col h4 {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(240,234,222,0.35);
+      margin-bottom: var(--sp-3);
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a {
+      font-size: 0.875rem;
+      color: rgba(240,234,222,0.58);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-col ul a:hover { color: rgba(240,234,222,0.92); }
+    .footer-bottom {
+      border-top: 1px solid rgba(240,234,222,0.08);
+      padding-top: var(--sp-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: rgba(240,234,222,0.28);
+    }
+
+    /* ============================================================
+       REVEAL ANIMATIONS
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .rd1 { transition-delay: 0.05s; }
+    .rd2 { transition-delay: 0.15s; }
+    .rd3 { transition-delay: 0.25s; }
+    .rd4 { transition-delay: 0.35s; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .wrap, .wrap-narrow { padding: 0 32px; }
+      #navbar, #navbar.scrolled { padding: 16px 32px; }
+    }
+    @media (max-width: 640px) {
+      .wrap, .wrap-narrow { padding: 0 20px; }
+      #navbar, #navbar.scrolled { padding: 14px 20px; }
+      .nav-logo { height: 32px; }
+      .nav-brand-name { font-size: 0.95rem; }
+      .form-wrapper { padding: var(--sp-4) var(--sp-3); border-radius: 12px; }
+      .footer-grid { grid-template-columns: 1fr; gap: var(--sp-5); }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .trust-strip { flex-direction: column; align-items: flex-start; gap: var(--sp-2); }
+      .trust-divider { display: none; }
+    }
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <a href="https://www.kelvinstone.ai" class="nav-brand">
+      <img src="brand_assets/Logo_Black.png" alt="Kelvinstone AI logo" class="nav-logo" />
+      <span class="nav-brand-name">Kelvinstone AI</span>
+    </a>
+    <a href="https://www.kelvinstone.ai" class="nav-back" aria-label="Back to main site">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Back to site
+    </a>
+  </nav>
+
+  <main>
+
+    <!-- INTRO -->
+    <section id="intro">
+      <div class="wrap-narrow">
+        <div class="section-label reveal">New Client Onboarding</div>
+        <h1 class="intro-h1 reveal rd1">
+          Let's build something<br><em>that actually works.</em>
+        </h1>
+        <div class="intro-accent-rule reveal rd2"></div>
+        <p class="intro-sub reveal rd2">
+          Fill in the details below and we'll review everything before our first call.
+          The more you share, the faster we can get your automation up and running.
+        </p>
+        <div class="step-chips reveal rd3">
+          <div class="step-chip">
+            <span class="step-chip-num">1</span>
+            Complete this form
+          </div>
+          <div class="step-chip">
+            <span class="step-chip-num">2</span>
+            We review your details
+          </div>
+          <div class="step-chip">
+            <span class="step-chip-num">3</span>
+            Onboarding call booked
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- TALLY FORM -->
+    <section id="form-section">
+      <div class="wrap-narrow">
+
+        <div class="form-wrapper reveal">
+          <div class="tally-container">
+            <iframe
+              data-tally-src="https://tally.so/embed/2EJG4V?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              loading="lazy"
+              width="100%"
+              height="100%"
+              frameborder="0"
+              marginheight="0"
+              marginwidth="0"
+              title="Kelvinstone AI — Client Onboarding Form">
+            </iframe>
+          </div>
+        </div>
+
+        <div class="trust-strip reveal rd2">
+          <div class="trust-item">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 1l1.5 3.5L12 5l-2.5 2.5.6 3.5L7 9.5 3.9 11l.6-3.5L2 5l3.5-.5L7 1z"/>
+            </svg>
+            Responses reviewed within 24 hours
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="10" height="8" rx="1.5"/>
+              <path d="M4.5 5V3.5a2.5 2.5 0 015 0V5"/>
+            </svg>
+            Your data is kept private
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            No commitment required
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="https://www.kelvinstone.ai" class="nav-brand">
+            <img src="brand_assets/Logo_White.png" alt="Kelvinstone AI" style="height:36px;width:auto;" />
+            <span class="footer-brand-name">Kelvinstone AI</span>
+          </a>
+          <p>Done-for-you lead capture and qualification for UK businesses. Every enquiry assessed and on your phone in under 60 seconds.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="https://www.kelvinstone.ai#services">Smart Enquiry Handler</a></li>
+            <li><a href="https://www.kelvinstone.ai#services">Your Business Website</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="https://www.kelvinstone.ai#process">How It Works</a></li>
+            <li><a href="https://www.kelvinstone.ai#benefits">Why Kelvinstone</a></li>
+            <li><a href="https://www.kelvinstone.ai#cta">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get Started</h4>
+          <ul>
+            <li><a href="https://www.kelvinstone.ai#cta">Free Audit</a></li>
+            <li><a href="mailto:jamie@kelvinstone.ai">jamie@kelvinstone.ai</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Kelvinstone AI Ltd. All rights reserved.</p>
+        <p>Registered in the United Kingdom</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TALLY EMBED SCRIPT -->
+  <script>
+    var d = document,
+        w = "https://tally.so/widgets/embed.js",
+        v = function() {
+          "undefined" != typeof Tally
+            ? Tally.loadEmbeds()
+            : d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e) {
+                e.src = e.dataset.tallySrc;
+              });
+        };
+    if ("undefined" != typeof Tally) {
+      v();
+    } else if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement("script");
+      s.src = w;
+      s.onload = v;
+      s.onerror = v;
+      d.body.appendChild(s);
+    }
+  </script>
+
+  <!-- NAV SCROLL + REVEAL -->
+  <script>
+    // Nav scroll class
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    // Force first-viewport reveals immediately
+    setTimeout(function() {
+      reveals.forEach(function(el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          el.classList.add('visible');
+        }
+      });
+    }, 50);
+  </script>
+
+</body>
+</html>
