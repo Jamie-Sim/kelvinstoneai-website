@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+/* ============================================================
+   BRAND TOKENS — Kelvinstone AI
+   Palette sourced from brand_assets/ColourScheme.png +
+   legacy/index.html design tokens. Do not substitute.
+============================================================ */
+:root {
+  --parchment:      #f0eade;
+  --parchment-mid:  #e6dfcf;
+  --parchment-dark: #d9d0bc;
+
+  --ink:        #181422;
+  --ink-mid:    rgba(24, 20, 34, 0.60);
+  --ink-muted:  rgba(24, 20, 34, 0.38);
+  --ink-subtle: rgba(24, 20, 34, 0.16);
+
+  --blue:       #3232AE;
+  --blue-mid:   #8282ED;
+  --blue-light: #BADEFC;
+
+  --terra:       #b84c38;
+  --terra-dark:  #7a2e1f;
+  --terra-hover: #c95843;
+
+  --off-white: #F5F5F5;
+  --night:     #25171A;
+
+  --rule:     rgba(24, 20, 34, 0.10);
+  --rule-mid: rgba(24, 20, 34, 0.18);
+}
+
+@theme inline {
+  /* Background / foreground (used by Tailwind's default bg/text utilities) */
+  --color-background: var(--parchment);
+  --color-foreground: var(--ink);
+
+  /* Brand palette — available as e.g. bg-parchment, text-ink, bg-blue, text-terra */
+  --color-parchment: var(--parchment);
+  --color-parchment-mid: var(--parchment-mid);
+  --color-parchment-dark: var(--parchment-dark);
+
+  --color-ink: var(--ink);
+
+  --color-blue: var(--blue);
+  --color-blue-mid: var(--blue-mid);
+  --color-blue-light: var(--blue-light);
+
+  --color-terra: var(--terra);
+  --color-terra-dark: var(--terra-dark);
+  --color-terra-hover: var(--terra-hover);
+
+  --color-off-white: var(--off-white);
+  --color-night: var(--night);
+
+  /* Fonts — wired to next/font CSS variables set in layout.tsx */
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-dm-serif-display);
+}
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
