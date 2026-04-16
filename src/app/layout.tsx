@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 
@@ -21,6 +21,13 @@ export const metadata: Metadata = {
   title: "Kelvinstone AI — Never Miss a Lead Again",
   description:
     "Kelvinstone AI — Done-for-you AI automation for UK businesses. Every enquiry captured, assessed, and on your phone in under 60 seconds.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#f0eade",
 };
 
 export default function RootLayout({
