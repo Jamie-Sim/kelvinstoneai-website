@@ -7,15 +7,20 @@ type Status = "idle" | "sending" | "success" | "error";
 export default function CTA() {
   const [status, setStatus] = useState<Status>("idle");
 
-  // Webhook wiring is deferred to Session 3 (via /api/submit route).
-  // For now, UX states are present but network call is a no-op placeholder.
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
     setStatus("sending");
     try {
-      await new Promise((r) => setTimeout(r, 400));
+      const data = Object.fromEntries(new FormData(form).entries());
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       setStatus("success");
-      (e.currentTarget as HTMLFormElement).reset();
+      form.reset();
     } catch {
       setStatus("error");
     }

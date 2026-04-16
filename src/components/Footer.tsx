@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <>
@@ -14,7 +16,7 @@ export default function Footer() {
         <div className="wrap">
           <div className="footer-grid">
             <div className="footer-brand">
-              <a href="#hero" className="nav-brand">
+              <Link href="/" className="nav-brand">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/brand_assets/Logo_White.png"
@@ -22,7 +24,7 @@ export default function Footer() {
                   style={{ height: "36px", width: "auto" }}
                 />
                 <span className="footer-brand-name">Kelvinstone AI</span>
-              </a>
+              </Link>
               <p>
                 Done-for-you lead capture and qualification for UK businesses. Every enquiry assessed and on your phone in under 60 seconds.
               </p>
@@ -30,22 +32,22 @@ export default function Footer() {
             <div className="footer-col">
               <h4>Services</h4>
               <ul>
-                <li><a href="#services">Smart Enquiry Handler</a></li>
-                <li><a href="#services">Your Business Website</a></li>
+                <li><Link href="/#services">Smart Enquiry Handler</Link></li>
+                <li><Link href="/#services">Your Business Website</Link></li>
               </ul>
             </div>
             <div className="footer-col">
               <h4>Company</h4>
               <ul>
-                <li><a href="#process">How It Works</a></li>
-                <li><a href="#benefits">Why Kelvinstone</a></li>
-                <li><a href="#cta">Contact</a></li>
+                <li><Link href="/#process">How It Works</Link></li>
+                <li><Link href="/#benefits">Why Kelvinstone</Link></li>
+                <li><Link href="/#cta">Contact</Link></li>
               </ul>
             </div>
             <div className="footer-col">
               <h4>Get Started</h4>
               <ul>
-                <li><a href="#cta">Free Audit</a></li>
+                <li><Link href="/#cta">Free Audit</Link></li>
                 <li><a href="mailto:jamie@kelvinstone.ai">jamie@kelvinstone.ai</a></li>
               </ul>
             </div>
