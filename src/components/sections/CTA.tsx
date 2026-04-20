@@ -79,6 +79,14 @@ export default function CTA() {
               </select>
               <input className="form-input" type="text" name="location" placeholder="Your location (city / town)" autoComplete="address-level2" required />
             </div>
+            <select className="form-input" name="estimated_budget" required defaultValue="">
+              <option value="" disabled>Estimated Budget</option>
+              <option>Under £500</option>
+              <option>£500 – £1,000</option>
+              <option>£1,000 – £2,500</option>
+              <option>£2,500 – £5,000</option>
+              <option>£5,000+</option>
+            </select>
             <textarea className="form-input" name="ideal_outcome" placeholder="Ideal outcome — what would success look like for your business? (optional)" />
             <button type="submit" className="form-submit" disabled={status === "sending" || status === "success"}>
               {buttonLabel}
