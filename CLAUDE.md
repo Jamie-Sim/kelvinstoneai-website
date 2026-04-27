@@ -33,8 +33,9 @@ Kelvinstone AI is an independent AI automation agency serving UK trades and prop
 ## Site Goals
 
 - **Now:** Marketing landing page — build trust, communicate value, convert visitors to leads/enquiries
+- This project is also used to create branded PDF Lead Magnet Documents/Resources - branded Kelvinstone assets such as pitch decks.
 - **Near-future:** Expand to include a client dashboard, blog/resources section, and backend features (following a Next.js tutorial structure)
-- **Stack direction:** Next.js + Tailwind CSS (migration from current vanilla HTML to happen as a separate task)
+- **Stack direction:** Next.js + Tailwind CSS (migration from current vanilla HTML to happen as a separate task.
 
 ---
 

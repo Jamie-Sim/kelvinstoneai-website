@@ -1,0 +1,1754 @@
+/* ============================================================
+   LEAD-MAGNET PDF — print + screen-preview styles
+   Reuses brand tokens from src/app/globals.css
+   Page model: each .lm-page is exactly A4 (210 x 297 mm)
+============================================================ */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   SCREEN PREVIEW — stack pages like a book on a reading desk
+------------------------------------------------------------ */
+@media screen {
+  body { background: #2a2635; }
+  /* Kill the film-grain overlay from globals.css on this route */
+  body::before { display: none !important; }
+
+  .lm-root {
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .lm-page {
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45),
+      0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+}
+
+/* ------------------------------------------------------------
+   PRINT — what Puppeteer sees
+------------------------------------------------------------ */
+@media print {
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body::before { display: none !important; }
+  .lm-root { padding: 0; gap: 0; display: block; }
+}
+
+/* ------------------------------------------------------------
+   PAGE FRAME (shared)
+------------------------------------------------------------ */
+.lm-page {
+  width: 210mm;
+  height: 297mm;
+  position: relative;
+  overflow: hidden;
+  background: var(--parchment);
+  color: var(--ink);
+  page-break-after: always;
+  break-after: page;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.lm-page:last-child { page-break-after: auto; break-after: auto; }
+
+.lm-page * { box-sizing: border-box; }
+
+/* ------------------------------------------------------------
+   COVER
+------------------------------------------------------------ */
+.lm-cover {
+  background: var(--blue);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 28mm 24mm;
+}
+.lm-cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 9pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 600;
+}
+.lm-cover-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 150mm;
+}
+.lm-cover-eyebrow {
+  font-size: 10pt;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 700;
+  margin-bottom: 18mm;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.lm-cover-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.lm-cover-title {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 56pt;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 10mm 0;
+}
+.lm-cover-title em {
+  font-style: italic;
+  color: #BADEFC;
+}
+.lm-cover-rule {
+  width: 24mm;
+  height: 2px;
+  background: var(--terra);
+  margin: 2mm 0 8mm 0;
+}
+.lm-cover-sub {
+  font-size: 13pt;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 120mm;
+  font-weight: 300;
+}
+.lm-cover-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12mm;
+}
+.lm-cover-sign {
+  font-size: 9.5pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 600;
+}
+.lm-cover-sign strong {
+  display: block;
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 14pt;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: #fff;
+  margin-top: 2mm;
+}
+.lm-cover-logo {
+  height: 12mm;
+  width: auto;
+  display: block;
+  opacity: 0.95;
+}
+
+/* ------------------------------------------------------------
+   TABLE OF CONTENTS
+------------------------------------------------------------ */
+.lm-toc {
+  padding: 28mm 24mm;
+  display: flex;
+  flex-direction: column;
+}
+.lm-toc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14mm;
+}
+.lm-toc-kicker {
+  font-size: 9pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  font-weight: 700;
+}
+.lm-toc-title {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 46pt;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 2mm 0 10mm 0;
+}
+.lm-toc-title em { font-style: italic; color: var(--blue); }
+.lm-toc-sub {
+  font-size: 11pt;
+  color: var(--ink-mid);
+  line-height: 1.6;
+  max-width: 140mm;
+  margin-bottom: 12mm;
+}
+
+.lm-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+.lm-toc-item {
+  display: grid;
+  grid-template-columns: 14mm 1fr auto;
+  align-items: baseline;
+  gap: 6mm;
+  padding: 5mm 0;
+  border-bottom: 1px solid var(--rule);
+}
+.lm-toc-num {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 18pt;
+  color: var(--terra);
+  letter-spacing: -0.01em;
+}
+.lm-toc-label-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4mm;
+  min-width: 0;
+}
+.lm-toc-label {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 16pt;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.lm-toc-dots {
+  flex: 1;
+  border-bottom: 1px dotted rgba(24, 20, 34, 0.28);
+  transform: translateY(-3px);
+  min-width: 10mm;
+}
+.lm-toc-page {
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+  font-size: 11pt;
+  font-weight: 600;
+  color: var(--ink-mid);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.lm-toc-foot {
+  margin-top: auto;
+  padding-top: 10mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 9pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   CHAPTER DIVIDER
+------------------------------------------------------------ */
+.lm-divider {
+  background: var(--parchment-mid);
+  padding: 28mm 24mm;
+  display: flex;
+  flex-direction: column;
+}
+.lm-divider-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 9pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  font-weight: 700;
+}
+.lm-divider-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 160mm;
+}
+.lm-divider-num {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 180pt;
+  line-height: 0.8;
+  color: var(--terra);
+  letter-spacing: -0.04em;
+  margin-bottom: 8mm;
+}
+.lm-divider-title {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 48pt;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 6mm;
+}
+.lm-divider-blurb {
+  font-size: 12pt;
+  line-height: 1.6;
+  color: var(--ink-mid);
+  max-width: 130mm;
+  font-weight: 400;
+}
+.lm-divider-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 9pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   CONTENT PAGE
+------------------------------------------------------------ */
+.lm-content {
+  display: flex;
+  flex-direction: column;
+  padding: 18mm 24mm 16mm;
+}
+.lm-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 6mm;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 10mm;
+  font-size: 8.5pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  font-weight: 600;
+}
+.lm-content-header-brand {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink);
+}
+.lm-content-body {
+  flex: 1;
+  min-height: 0;
+}
+.lm-content-footer {
+  margin-top: 10mm;
+  padding-top: 6mm;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8.5pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  font-weight: 600;
+}
+.lm-content-footer-num {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 12pt;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------------
+   TYPOGRAPHY INSIDE CONTENT
+------------------------------------------------------------ */
+.lm-content-body h1,
+.lm-content-body h2 {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 28pt;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 8mm 0;
+  max-width: 150mm;
+}
+.lm-content-body h2 em { font-style: italic; color: var(--blue); }
+
+.lm-content-body h3 {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 15pt;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 6mm 0 3mm 0;
+}
+
+.lm-content-body p {
+  font-size: 10.5pt;
+  line-height: 1.62;
+  color: var(--ink);
+  margin: 0 0 4mm 0;
+  max-width: 150mm;
+}
+.lm-content-body p:last-child { margin-bottom: 0; }
+
+.lm-content-body strong { font-weight: 700; color: var(--ink); }
+.lm-content-body em { font-style: italic; }
+
+.lm-content-body ul,
+.lm-content-body ol {
+  margin: 0 0 4mm 0;
+  padding: 0 0 0 5mm;
+  max-width: 150mm;
+}
+.lm-content-body li {
+  font-size: 10.5pt;
+  line-height: 1.55;
+  color: var(--ink);
+  margin-bottom: 2.5mm;
+  padding-left: 2mm;
+}
+.lm-content-body ul li::marker { color: var(--terra); content: "— "; }
+.lm-content-body ol li::marker { color: var(--terra); font-weight: 700; }
+
+.lm-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 4mm;
+}
+.lm-kicker::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--terra);
+}
+
+.lm-lead {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 14pt;
+  line-height: 1.42;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  margin: 0 0 6mm 0 !important;
+  max-width: 150mm;
+}
+
+/* ------------------------------------------------------------
+   REUSABLE PRIMITIVES
+------------------------------------------------------------ */
+
+/* Callouts — blue / terra / mid variants */
+.lm-callout {
+  border-radius: 4px;
+  padding: 7mm 8mm;
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-callout-blue {
+  background: rgba(50, 50, 174, 0.06);
+  border-left: 2px solid var(--blue);
+}
+.lm-callout-terra {
+  background: rgba(184, 76, 56, 0.07);
+  border-left: 2px solid var(--terra);
+}
+.lm-callout-mid {
+  background: rgba(24, 20, 34, 0.04);
+  border-left: 2px solid var(--ink-mid);
+}
+.lm-callout-label {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 3mm;
+  display: block;
+}
+.lm-callout-blue .lm-callout-label { color: var(--blue); }
+.lm-callout p {
+  font-size: 10pt;
+  line-height: 1.6;
+  margin: 0 0 3mm 0;
+  color: var(--ink);
+}
+.lm-callout p:last-child { margin-bottom: 0; }
+
+/* Numbered steps — from site's Pain/Process patterns */
+.lm-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+  margin: 6mm 0;
+}
+.lm-step {
+  display: grid;
+  grid-template-columns: 18mm 1fr;
+  gap: 6mm;
+  align-items: start;
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 6mm;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-step-num {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 36pt;
+  line-height: 0.9;
+  color: var(--ink-subtle);
+  letter-spacing: -0.03em;
+}
+.lm-step-body h4 {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 13pt;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 2mm 0;
+}
+.lm-step-body p {
+  font-size: 10pt;
+  line-height: 1.55;
+  color: var(--ink-mid);
+  margin: 0;
+}
+
+/* Stat blocks */
+.lm-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), 1fr);
+  gap: 4mm;
+  margin: 6mm 0;
+}
+.lm-stat {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 6mm;
+  text-align: center;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-stat-value {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 30pt;
+  line-height: 1;
+  color: var(--terra);
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: 2mm;
+}
+.lm-stat-label {
+  font-size: 9pt;
+  color: var(--ink-mid);
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+/* Comparison table */
+.lm-compare {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6mm 0;
+  font-size: 10pt;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-compare th {
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+  text-align: left;
+  padding: 4mm 5mm;
+  font-size: 9.5pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.lm-compare td {
+  padding: 4mm 5mm;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  line-height: 1.5;
+  vertical-align: top;
+}
+.lm-compare tbody tr:nth-child(odd) td {
+  background: var(--parchment-mid);
+}
+.lm-compare tbody tr:last-child td { border-bottom: none; }
+
+/* Pull quote */
+.lm-pullquote {
+  border-left: 3px solid var(--terra);
+  padding: 2mm 0 2mm 7mm;
+  margin: 8mm 0;
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-style: italic;
+  font-size: 16pt;
+  line-height: 1.32;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-pullquote-attr {
+  display: block;
+  margin-top: 4mm;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+  font-style: normal;
+  font-size: 9pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  font-weight: 600;
+}
+
+/* Figure (AI-generated or SVG illustration wrapper) */
+.lm-figure {
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-figure img,
+.lm-figure svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+.lm-figure-caption {
+  margin-top: 3mm;
+  font-size: 9pt;
+  line-height: 1.5;
+  color: var(--ink-mid);
+  font-style: italic;
+}
+
+/* Process flow (native SVG wrapper — sizing helper) */
+.lm-flow {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 8mm;
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* ------------------------------------------------------------
+   STAT HERO — full-bleed single-stat page (section openers)
+------------------------------------------------------------ */
+.lm-stathero {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 28mm 24mm;
+}
+.lm-stathero-blue {
+  background: var(--blue);
+  color: #fff;
+}
+.lm-stathero-terra {
+  background: var(--terra);
+  color: #fff;
+}
+.lm-stathero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 9pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 600;
+}
+.lm-stathero-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 155mm;
+}
+.lm-stathero-value {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 220pt;
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  color: #fff;
+  margin-bottom: 10mm;
+}
+.lm-stathero-label {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 26pt;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #fff;
+  font-weight: 400;
+  margin: 0 0 6mm 0;
+  max-width: 140mm;
+}
+.lm-stathero-sub {
+  font-size: 12pt;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  max-width: 135mm;
+  font-weight: 300;
+}
+.lm-stathero-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12mm;
+  font-size: 8.5pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+}
+.lm-stathero-mark {
+  color: #fff;
+}
+
+/* ------------------------------------------------------------
+   PERCENT LIST — clean labelled percentages with dotted leaders
+------------------------------------------------------------ */
+.lm-percentlist {
+  list-style: none;
+  padding: 0;
+  margin: 6mm 0;
+  border-top: 1px solid var(--rule);
+  max-width: 150mm;
+}
+.lm-percentlist li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 4mm;
+  padding: 5mm 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 11pt;
+  color: var(--ink);
+  line-height: 1.35;
+}
+.lm-percentlist-label {
+  display: inline;
+}
+.lm-percentlist-dots {
+  grid-column: 1 / 2;
+  border-bottom: 1px dotted rgba(24, 20, 34, 0.28);
+  height: 1px;
+  align-self: center;
+  margin-left: auto;
+  margin-right: 3mm;
+  width: 8mm;
+  display: none;
+}
+.lm-percentlist-value {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 18pt;
+  font-weight: 400;
+  color: var(--terra);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.lm-percentlist-blue .lm-percentlist-value {
+  color: var(--blue);
+}
+
+/* ------------------------------------------------------------
+   DECISION TREE — branching Y/N diagram
+------------------------------------------------------------ */
+.lm-decision {
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-decision-question {
+  border: 1px solid var(--rule-mid);
+  background: var(--parchment);
+  padding: 5mm 7mm;
+  text-align: center;
+  max-width: 140mm;
+  margin: 0 auto;
+  position: relative;
+}
+.lm-decision-question::after {
+  display: none;
+}
+.lm-decision-qlabel {
+  display: block;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 2mm;
+}
+.lm-decision-question p {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 15pt;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.lm-decision-branches {
+  display: grid;
+  gap: 6mm;
+  margin-top: 9mm;
+  position: relative;
+}
+.lm-decision-branches::before {
+  display: none;
+}
+.lm-decision-branch {
+  text-align: center;
+  padding: 6mm 5mm;
+  border-top: 2px solid var(--blue);
+  background: rgba(50, 50, 174, 0.04);
+  position: relative;
+}
+.lm-decision-branch::before {
+  display: none;
+}
+.lm-decision-branch-terra {
+  border-top-color: var(--terra);
+  background: rgba(184, 76, 56, 0.05);
+}
+.lm-decision-branch-mid {
+  border-top-color: var(--ink-mid);
+  background: rgba(24, 20, 34, 0.04);
+}
+.lm-decision-answer {
+  display: inline-block;
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  padding: 1.5mm 4mm;
+  background: var(--parchment);
+  border: 1px solid var(--blue);
+  border-radius: 999px;
+  margin-bottom: 4mm;
+}
+.lm-decision-branch-terra .lm-decision-answer {
+  color: var(--terra);
+  border-color: var(--terra);
+}
+.lm-decision-branch-mid .lm-decision-answer {
+  color: var(--ink);
+  border-color: var(--ink-mid);
+}
+.lm-decision-arrow {
+  width: 0;
+  height: 0;
+  margin: 0 auto 4mm;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--rule-mid);
+}
+.lm-decision-result {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 13pt;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0 0 3mm 0;
+  letter-spacing: -0.01em;
+}
+.lm-decision-detail {
+  font-size: 9pt;
+  line-height: 1.5;
+  color: var(--ink-mid);
+  font-style: italic;
+}
+.lm-decision-caption {
+  margin-top: 10mm;
+  padding-top: 5mm;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  font-size: 9.5pt;
+  font-style: italic;
+  color: var(--ink-mid);
+}
+
+/* ------------------------------------------------------------
+   CHAT PANEL — LLM chat mockup (and warn variant for hallucinations)
+------------------------------------------------------------ */
+.lm-chat {
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: #fbf7ec;
+  padding: 0;
+  margin: 5mm 0;
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-chat-head {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  padding: 3mm 5mm;
+  background: var(--parchment-mid);
+  border-bottom: 1px solid var(--rule);
+}
+.lm-chat-dot {
+  width: 2.4mm;
+  height: 2.4mm;
+  border-radius: 50%;
+  background: rgba(24, 20, 34, 0.18);
+  display: inline-block;
+}
+.lm-chat-title {
+  margin-left: 3mm;
+  font-size: 9pt;
+  color: var(--ink-mid);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.lm-chat-sub {
+  padding: 3mm 5mm;
+  font-size: 8.5pt;
+  color: var(--ink-mid);
+  font-style: italic;
+  border-bottom: 1px solid var(--rule);
+  background: var(--parchment);
+}
+.lm-chat-body {
+  padding: 5mm 5mm 3mm;
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+}
+.lm-chat-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+  max-width: 90%;
+}
+.lm-chat-msg-user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+.lm-chat-msg-ai {
+  align-self: flex-start;
+}
+.lm-chat-who {
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.lm-chat-bubble {
+  padding: 3mm 4mm;
+  border-radius: 6px;
+  font-size: 10pt;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.lm-chat-msg-user .lm-chat-bubble {
+  background: rgba(50, 50, 174, 0.08);
+  border: 1px solid rgba(50, 50, 174, 0.15);
+}
+.lm-chat-msg-ai .lm-chat-bubble {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+}
+.lm-chat-msg-ai .lm-chat-bubble ul,
+.lm-chat-msg-ai .lm-chat-bubble ol {
+  margin: 2mm 0 0 0;
+  padding-left: 4mm;
+}
+.lm-chat-msg-ai .lm-chat-bubble li {
+  font-size: 9.5pt;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 1mm;
+}
+.lm-chat-disclaimer {
+  padding: 3mm 5mm;
+  background: rgba(184, 76, 56, 0.08);
+  border-top: 1px solid rgba(184, 76, 56, 0.25);
+  font-size: 9pt;
+  line-height: 1.5;
+  color: var(--terra-dark);
+  font-weight: 600;
+}
+
+/* Phone autocomplete mockup */
+.lm-phone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-phone-frame {
+  width: 72mm;
+  background: var(--parchment);
+  border: 1.5px solid rgba(24, 20, 34, 0.35);
+  border-radius: 8mm;
+  padding: 4mm 3mm 3mm;
+  position: relative;
+  box-shadow: 0 0 0 1mm var(--parchment), 0 2mm 8mm rgba(24, 20, 34, 0.08);
+}
+.lm-phone-notch {
+  width: 18mm;
+  height: 2.5mm;
+  background: rgba(24, 20, 34, 0.4);
+  border-radius: 2mm;
+  margin: 0 auto 3mm;
+}
+.lm-phone-msg-area {
+  min-height: 20mm;
+  padding: 2mm 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+.lm-phone-msg-bubble {
+  align-self: flex-end;
+  max-width: 80%;
+  background: rgba(50, 50, 174, 0.12);
+  color: var(--ink);
+  padding: 2mm 3mm;
+  border-radius: 4mm;
+  font-size: 9pt;
+  line-height: 1.3;
+}
+.lm-phone-suggestions {
+  display: flex;
+  gap: 1.5mm;
+  padding: 2mm 1mm;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin: 2mm 0;
+}
+.lm-phone-chip {
+  flex: 1;
+  text-align: center;
+  font-size: 8pt;
+  padding: 1.5mm 1mm;
+  background: var(--parchment-mid);
+  border-radius: 2mm;
+  color: var(--ink);
+  font-weight: 500;
+}
+.lm-phone-input {
+  display: flex;
+  align-items: center;
+  padding: 1.5mm 2mm;
+  margin: 1mm 0 2mm;
+  border: 1px solid var(--rule);
+  border-radius: 6mm;
+  background: var(--parchment-mid);
+  font-size: 8pt;
+  min-height: 6mm;
+}
+.lm-phone-typed {
+  color: var(--ink);
+}
+.lm-phone-caret {
+  display: inline-block;
+  width: 1px;
+  height: 3mm;
+  background: var(--blue);
+  margin-left: 1mm;
+}
+.lm-phone-keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+  padding: 1mm 0;
+}
+.lm-phone-keyrow {
+  display: flex;
+  gap: 0.8mm;
+  justify-content: center;
+}
+.lm-phone-key {
+  flex: 1;
+  max-width: 5mm;
+  height: 4mm;
+  background: var(--parchment-mid);
+  border-radius: 0.8mm;
+  border: 1px solid var(--rule);
+}
+.lm-phone-key-wide {
+  max-width: 40mm;
+  flex: 1;
+}
+.lm-phone-caption {
+  margin-top: 4mm;
+  font-size: 9.5pt;
+  font-style: italic;
+  color: var(--ink-mid);
+  text-align: center;
+  max-width: 130mm;
+}
+
+/* ------------------------------------------------------------
+   TIMELINE (horizontal, SVG-based)
+------------------------------------------------------------ */
+.lm-timeline {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 6mm 4mm 8mm;
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-timeline-caption {
+  margin-top: 2mm;
+  font-size: 9.5pt;
+  font-style: italic;
+  color: var(--ink-mid);
+  text-align: center;
+}
+
+/* ------------------------------------------------------------
+   CATEGORY GRID — card grid with number / title / body / foot
+------------------------------------------------------------ */
+.lm-cats {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), 1fr);
+  gap: 4mm;
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-cat {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 6mm;
+  display: flex;
+  flex-direction: column;
+  min-height: 52mm;
+}
+.lm-cat-num {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 16pt;
+  color: var(--terra);
+  line-height: 1;
+  margin-bottom: 3mm;
+  letter-spacing: -0.01em;
+}
+.lm-cat-title {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 13pt;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 3mm 0;
+}
+.lm-cat-body {
+  font-size: 9.5pt;
+  line-height: 1.5;
+  color: var(--ink-mid);
+  flex: 1;
+}
+.lm-cat-foot {
+  margin-top: 4mm;
+  padding-top: 3mm;
+  border-top: 1px solid var(--rule);
+  font-size: 8.5pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--terra);
+  font-weight: 700;
+}
+
+/* Page-local modifier: pull content up to reclaim the top gap
+   (used on dense pages like §6 p.43 where a tall primitive pushes
+   closing copy into the footer) */
+.lm-tight-top {
+  margin-top: -6mm;
+}
+.lm-tight-top .lm-prompt {
+  margin: 4mm 0;
+}
+
+/* ------------------------------------------------------------
+   PROMPT BOX — monospaced downloadable-looking prompt
+------------------------------------------------------------ */
+.lm-prompt {
+  background: #1a1725;
+  color: #f5f1e3;
+  border-radius: 6px;
+  padding: 5mm 6mm 5mm;
+  margin: 5mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-prompt-head {
+  margin-bottom: 3mm;
+  padding-bottom: 2.5mm;
+  border-bottom: 1px solid rgba(245, 241, 227, 0.15);
+}
+.lm-prompt-label {
+  display: block;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #e8b9a9;
+  margin-bottom: 1.5mm;
+}
+.lm-prompt-title {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin: 0;
+}
+.lm-prompt-code {
+  font-family: "SFMono-Regular", ui-monospace, "Menlo", "Monaco", Consolas, monospace;
+  font-size: 7.5pt;
+  line-height: 1.5;
+  color: #f5f1e3;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: transparent;
+}
+.lm-prompt-foot {
+  margin-top: 3.5mm;
+  padding-top: 3mm;
+  border-top: 1px solid rgba(245, 241, 227, 0.15);
+  font-size: 8.5pt;
+  line-height: 1.5;
+  color: #d8d0bf;
+}
+.lm-prompt-foot strong {
+  color: #fff;
+}
+.lm-prompt-foot ul {
+  margin: 2mm 0 0;
+  padding-left: 4mm;
+  max-width: none;
+}
+.lm-prompt-foot li {
+  margin-bottom: 1.5mm;
+  padding-left: 1mm;
+  color: #d8d0bf;
+  font-size: 8.5pt;
+  line-height: 1.45;
+}
+.lm-prompt-foot li::marker { color: #e8b9a9; content: "— "; }
+
+/* ------------------------------------------------------------
+   NESTED RINGS — §3 V1 (inline use)
+------------------------------------------------------------ */
+.lm-rings {
+  margin: 4mm auto;
+  max-width: 115mm;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-rings-caption {
+  text-align: center;
+  font-size: 9.5pt;
+  font-style: italic;
+  color: var(--ink-mid);
+  margin-top: 3mm;
+}
+
+/* ------------------------------------------------------------
+   TOKEN BOXES — §3 V3
+------------------------------------------------------------ */
+.lm-tokens {
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-tokens-sentence {
+  font-size: 11pt;
+  color: var(--ink-mid);
+  margin-bottom: 4mm;
+  font-style: italic;
+}
+.lm-tokens-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2mm;
+  justify-content: center;
+  padding: 5mm;
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+.lm-token {
+  font-family: "SFMono-Regular", ui-monospace, "Menlo", "Monaco", Consolas, monospace;
+  font-size: 11pt;
+  padding: 2mm 3.5mm;
+  background: var(--parchment-mid);
+  border: 1px solid var(--rule-mid);
+  border-radius: 3px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.lm-tokens-note {
+  margin-top: 3mm;
+  font-size: 9.5pt;
+  color: var(--ink-mid);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ------------------------------------------------------------
+   TOOL CARDS — §4 V1 (three-panel comparison)
+------------------------------------------------------------ */
+.lm-tools {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4mm;
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-tool {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--blue);
+  border-radius: 4px;
+  padding: 6mm 5mm;
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+.lm-tool:nth-child(2) {
+  border-top-color: var(--terra);
+}
+.lm-tool:nth-child(3) {
+  border-top-color: var(--ink-mid);
+}
+.lm-tool-name {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 20pt;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.lm-tool-maker {
+  font-size: 8.5pt;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  margin-top: -2mm;
+}
+.lm-tool-row {
+  font-size: 9.5pt;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.lm-tool-row b {
+  display: block;
+  font-size: 8pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 1mm;
+  font-weight: 700;
+}
+.lm-tool-price {
+  margin-top: auto;
+  padding-top: 3mm;
+  border-top: 1px solid var(--rule);
+  font-size: 9.5pt;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   WORKFLOW STEPS — §5 V3 (labelled vertical flow)
+------------------------------------------------------------ */
+.lm-workflow {
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-workflow-row {
+  display: grid;
+  grid-template-columns: 36mm 1fr;
+  gap: 4mm;
+  padding: 2.5mm 0;
+  align-items: start;
+  position: relative;
+}
+.lm-workflow-row + .lm-workflow-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18mm;
+  width: 1px;
+  height: 2.5mm;
+  background: var(--rule-mid);
+}
+.lm-workflow-tag {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 1.5mm 2mm;
+  border-radius: 2mm;
+  text-align: center;
+  align-self: start;
+  white-space: nowrap;
+}
+.lm-workflow-tag-trigger {
+  background: rgba(24, 20, 34, 0.06);
+  color: var(--ink-mid);
+  border: 1px solid var(--rule-mid);
+}
+.lm-workflow-tag-det {
+  background: rgba(50, 50, 174, 0.08);
+  color: var(--blue);
+  border: 1px solid rgba(50, 50, 174, 0.2);
+}
+.lm-workflow-tag-ai {
+  background: rgba(184, 76, 56, 0.08);
+  color: var(--terra-dark);
+  border: 1px solid rgba(184, 76, 56, 0.25);
+}
+.lm-workflow-tag-human {
+  background: #fff;
+  color: var(--ink);
+  border: 1px dashed var(--ink-mid);
+}
+.lm-workflow-body {
+  padding: 1mm 0;
+}
+.lm-workflow-body h4 {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 12pt;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 1mm 0;
+}
+.lm-workflow-body p {
+  font-size: 9.5pt;
+  line-height: 1.5;
+  color: var(--ink-mid);
+  margin: 0;
+}
+.lm-workflow-caption {
+  margin-top: 4mm;
+  font-size: 9.5pt;
+  font-style: italic;
+  color: var(--ink-mid);
+  text-align: center;
+}
+
+/* ------------------------------------------------------------
+   SPLIT YES/NO — §6 V2 (two-column automatable comparison)
+------------------------------------------------------------ */
+.lm-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-split-col {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--blue);
+  border-radius: 4px;
+  padding: 6mm 5mm;
+}
+.lm-split-col-no {
+  border-top-color: var(--terra);
+}
+.lm-split-head {
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 3mm;
+}
+.lm-split-col-no .lm-split-head {
+  color: var(--terra);
+}
+.lm-split ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.lm-split li {
+  font-size: 9.5pt;
+  line-height: 1.45;
+  color: var(--ink);
+  padding: 2.5mm 0;
+  border-bottom: 1px solid var(--rule);
+}
+.lm-split li:last-child {
+  border-bottom: none;
+}
+
+/* ------------------------------------------------------------
+   LINE CHART — §7 V2 (context rot) — styling for inline SVG
+------------------------------------------------------------ */
+.lm-linechart {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 8mm 6mm 6mm;
+  margin: 6mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-linechart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.lm-linechart-zones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4mm;
+  margin-top: 5mm;
+  text-align: center;
+}
+.lm-linechart-zone b {
+  display: block;
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 1mm;
+}
+.lm-linechart-zone span {
+  font-size: 9pt;
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+.lm-linechart-caption {
+  margin-top: 7mm;
+  padding-top: 4mm;
+  border-top: 1px solid var(--rule);
+  font-size: 9.5pt;
+  font-style: italic;
+  color: var(--ink-mid);
+  text-align: center;
+}
+
+/* ------------------------------------------------------------
+   LOGO ROW + HERO — §5 tools page (p.38)
+------------------------------------------------------------ */
+.lm-logo-row {
+  display: flex;
+  gap: 3mm;
+  margin: 5mm 0 6mm;
+  align-items: stretch;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-logo-chip {
+  flex: 1;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 4mm 5mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 16mm;
+}
+.lm-logo-chip img {
+  max-height: 7mm;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+}
+.lm-hero-tool {
+  margin: 8mm 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4mm;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.lm-hero-tool-label {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin: 0;
+  text-align: center;
+}
+.lm-hero-tool img {
+  max-width: 110mm;
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------
+   GLOSSARY — §9 (hanging-indent reference list)
+------------------------------------------------------------ */
+.lm-content-body ul.lm-glossary {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+  max-width: none;
+}
+.lm-content-body ul.lm-glossary li {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 44mm 1fr;
+  gap: 6mm;
+  padding: 4mm 0;
+  margin: 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  font-size: inherit;
+  padding-left: 0;
+}
+.lm-content-body ul.lm-glossary li::marker {
+  content: "";
+}
+.lm-glossary-term {
+  display: block;
+}
+.lm-glossary-name {
+  display: block;
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 14pt;
+  font-weight: 400;
+  color: var(--blue);
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+}
+.lm-glossary-expand {
+  display: block;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 1.5mm;
+  line-height: 1.3;
+}
+.lm-content-body p.lm-glossary-def {
+  font-size: 9.5pt;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+  max-width: none;
+}
+
+/* ------------------------------------------------------------
+   CLOSING PAGE — §8 V2
+------------------------------------------------------------ */
+.lm-closing {
+  width: 100%;
+  height: 100%;
+  padding: 28mm 24mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background: var(--parchment);
+}
+.lm-closing-rule {
+  width: 22mm;
+  height: 2px;
+  background: var(--terra);
+  margin: 0 auto 14mm;
+}
+.lm-closing-message {
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 36pt;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 16mm 0;
+  max-width: 140mm;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 400;
+}
+.lm-closing-contact {
+  font-size: 11pt;
+  line-height: 1.8;
+  color: var(--ink-mid);
+}
+.lm-closing-contact strong {
+  display: block;
+  font-family: var(--font-dm-serif-display), "DM Serif Display", serif;
+  font-size: 14pt;
+  color: var(--ink);
+  font-weight: 400;
+  margin-bottom: 3mm;
+}
+.lm-closing-contact em {
+  display: block;
+  margin-top: 3mm;
+  font-style: italic;
+  color: var(--ink-muted);
+  font-size: 9.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}

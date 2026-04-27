@@ -1265,3 +1265,110 @@ footer.site-footer .wrap { position: relative; z-index: 1; }
   .trust-strip { flex-direction: column; align-items: flex-start; gap: var(--sp-2); }
   .trust-divider { display: none; }
 }
+
+/* ============================================================
+   RESOURCES PAGE — guide cards
+============================================================ */
+#resources-intro {
+  padding-top: calc(var(--sp-16) + var(--sp-4));
+  padding-bottom: var(--sp-8);
+}
+#resources-list {
+  padding: var(--sp-10) 0 var(--sp-16);
+}
+.resource-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  margin-top: var(--sp-6);
+}
+.resource-card {
+  background: var(--parchment-mid);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  transition: border-color 0.2s ease;
+}
+.resource-card:hover { border-color: var(--rule-mid); }
+.resource-card-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin: 0;
+}
+.resource-card-eyebrow::before {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--terra);
+}
+.resource-card-title {
+  font-family: var(--font-dm-serif-display), 'DM Serif Display', serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 4px 0 0;
+}
+.resource-card-meta {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ink-mid);
+  margin: 0;
+}
+.resource-card-body {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0;
+  max-width: 60ch;
+}
+.resource-card-actions {
+  margin-top: var(--sp-2);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+.resource-card-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px dashed var(--rule-mid);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+.resources-foot {
+  margin-top: var(--sp-6);
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--ink-mid);
+  line-height: 1.7;
+}
+.resources-foot a {
+  color: var(--blue);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+.resources-foot a:hover { color: var(--terra); }
+@media (max-width: 640px) {
+  .resource-card { padding: var(--sp-4) var(--sp-3); }
+}

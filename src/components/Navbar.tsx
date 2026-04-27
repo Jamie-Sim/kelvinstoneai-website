@@ -19,7 +19,7 @@ export default function Navbar() {
       role="navigation"
       aria-label="Main navigation"
     >
-      <a href="#hero" className="nav-brand">
+      <a href="/" className="nav-brand">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/brand_assets/Logo_Black.png"
@@ -29,12 +29,13 @@ export default function Navbar() {
         <span className="nav-brand-name">Kelvinstone AI</span>
       </a>
       <ul className="nav-links">
-        <li><a href="#pain">The Problem</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#benefits">Why Us</a></li>
+        <li><a href="/#pain">The Problem</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#process">Process</a></li>
+        <li><a href="/#benefits">Why Us</a></li>
+        <li><a href="/resources">Resources</a></li>
       </ul>
-      <a href="#cta" className="nav-cta">Get a Free Audit</a>
+      <a href="/#cta" className="nav-cta">Get a Free Audit</a>
     </nav>
   );
 }
