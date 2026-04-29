@@ -10,9 +10,11 @@
     "pdf": "node scripts/generate-pdf.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.105.1",
     "next": "16.2.3",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "resend": "^6.12.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
