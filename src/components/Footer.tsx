@@ -26,14 +26,15 @@ export default function Footer() {
                 <span className="footer-brand-name">Kelvinstone AI</span>
               </Link>
               <p>
-                Done-for-you lead capture and qualification for UK businesses. Every enquiry assessed and on your phone in under 60 seconds.
+                AI growth partner for UK property maintenance and improvement firms. Better websites, smarter follow-up, fewer missed jobs — built in Glasgow.
               </p>
             </div>
             <div className="footer-col">
               <h4>Services</h4>
               <ul>
-                <li><Link href="/#services">Smart Enquiry Handler</Link></li>
                 <li><Link href="/#services">Your Business Website</Link></li>
+                <li><Link href="/#services">Smart Lead Capture</Link></li>
+                <li><Link href="/#services">Smarter Follow-Up</Link></li>
               </ul>
             </div>
             <div className="footer-col">

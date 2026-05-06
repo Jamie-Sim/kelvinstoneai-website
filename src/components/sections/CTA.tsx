@@ -53,10 +53,10 @@ export default function CTA() {
         <div className="cta-inner reveal">
           <span className="section-label label-center">Get Started</span>
           <h2>
-            Find out where you&apos;re<br /><em>losing leads — for free</em>
+            Find out where you&apos;re<br /><em>losing work — for free</em>
           </h2>
           <p>
-            Tell us about your business in 5 minutes and we&apos;ll show you exactly where enquiries are slipping through — and what it would take to stop it. No pitch. No obligation.
+            Tell us about your firm in 5 minutes and we&apos;ll show you exactly where leads are slipping through, where revenue&apos;s sitting unused in your CRM, and what it would take to fix it. No pitch. No obligation.
           </p>
 
           <form id="audit-form" className="cta-form" onSubmit={onSubmit}>
@@ -69,24 +69,24 @@ export default function CTA() {
             <div className="form-row">
               <select className="form-input" name="business_type" required defaultValue="">
                 <option value="" disabled>Business type</option>
-                <option>Trades / Construction</option>
-                <option>Property / Real Estate</option>
-                <option>Professional Services</option>
-                <option>Retail / E-commerce</option>
-                <option>Hospitality / Food &amp; Drink</option>
-                <option>Creative / Marketing / Media</option>
-                <option>Other</option>
+                <option>Kitchen / bathroom renovation</option>
+                <option>Home improvement / refurb</option>
+                <option>Property maintenance (multi-trade)</option>
+                <option>Joinery / carpentry</option>
+                <option>Roofing / external works</option>
+                <option>Landscaping / outdoor</option>
+                <option>Other property / improvement</option>
               </select>
-              <input className="form-input" type="text" name="location" placeholder="Your location (city / town)" autoComplete="address-level2" required />
+              <select className="form-input" name="team_size" required defaultValue="">
+                <option value="" disabled>Team size</option>
+                <option>Just me</option>
+                <option>2 – 5</option>
+                <option>6 – 15</option>
+                <option>16 – 50</option>
+                <option>50+</option>
+              </select>
             </div>
-            <select className="form-input" name="estimated_budget" required defaultValue="">
-              <option value="" disabled>Estimated Budget</option>
-              <option>Under £500</option>
-              <option>£500 – £1,000</option>
-              <option>£1,000 – £2,500</option>
-              <option>£2,500 – £5,000</option>
-              <option>£5,000+</option>
-            </select>
+            <input className="form-input" type="text" name="location" placeholder="Your location (city / town)" autoComplete="address-level2" required />
             <textarea className="form-input" name="ideal_outcome" placeholder="Ideal outcome — what would success look like for your business? (optional)" />
             <button type="submit" className="form-submit" disabled={status === "sending" || status === "success"}>
               {buttonLabel}

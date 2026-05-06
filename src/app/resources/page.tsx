@@ -21,14 +21,15 @@ export default function ResourcesPage() {
             <h1 className="intro-h1 reveal rd1">
               Free guides on AI for
               <br />
-              <em>people running a business.</em>
+              <em>people running a property business.</em>
             </h1>
             <div className="intro-accent-rule reveal rd2"></div>
             <p className="intro-sub reveal rd2">
               Plain-English PDFs. No email wall, no upsell, no fluff. The
               same information we&rsquo;d cover in a paid consultation —
-              written for trades, property and other small businesses where
-              the owner hasn&rsquo;t got time to wade through hype.
+              written for property maintenance, renovation and improvement
+              firms where the owner hasn&rsquo;t got time to wade through
+              hype.
             </p>
           </div>
         </section>

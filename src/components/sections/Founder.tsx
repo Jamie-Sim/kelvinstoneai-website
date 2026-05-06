@@ -10,10 +10,6 @@ export default function Founder() {
               alt="Jamie Sim, founder of Kelvinstone AI"
               className="founder-photo"
             />
-            <div className="founder-certs">
-              <span className="cert-badge">Certified AI Specialist</span>
-              <span className="cert-badge">n8n Certified</span>
-            </div>
           </div>
 
           <div className="founder-text-col">
@@ -24,17 +20,17 @@ export default function Founder() {
             <div className="founder-bio">
               <p>Hi, I&apos;m Jamie — founder of Kelvinstone AI.</p>
               <p>
-                I studied Architecture at Edinburgh and Game Development at postgraduate level. Both taught me the same thing: how to take something complex and turn it into something that actually works in the real world.
+                I studied Architecture at Edinburgh, then Game Development at postgraduate level. Architecture taught me how property work actually flows — the rhythms of a project, the gap between a homeowner&apos;s brief and a buildable answer, the difference between a firm that wins repeat work and one that doesn&apos;t. Game development taught me how to ship working systems under pressure.
               </p>
               <p>
-                When AI automation started changing what was possible for small businesses, I noticed something uncomfortable: the businesses keeping the UK running — people doing real work, generating real revenue — were being left behind. Not because they weren&apos;t capable, but because nobody was building tools that fit how they actually work.
+                When AI started reshaping what was possible for small businesses, I noticed something uncomfortable: the property firms keeping the UK&apos;s housing stock standing — kitchen fitters, refurb specialists, multi-trade maintenance teams — were being left behind. Not because they weren&apos;t capable, but because nobody was building tools around how property work actually runs.
               </p>
               <p className="founder-pivot">That&apos;s why Kelvinstone exists.</p>
               <p>
-                I work with UK businesses who are tired of losing leads they should have won — and want a practical fix, not a technology lecture. I build systems that handle the repetitive stuff so you can focus on what you&apos;re actually good at.
+                I work with UK property maintenance and improvement firms who are tired of losing work they should have won — and want a practical fix, not another piece of software to learn. I build systems that handle the lead capture, the follow-up and the admin that quietly costs you jobs — so you can stay focused on the work itself.
               </p>
               <p>
-                No buzzwords. No jargon. No overcomplicated software you have to learn. Just a system that works — and a person you can actually call if something isn&apos;t right.
+                No buzzwords. No jargon. No software you&apos;ll log into twice. Just a system that works, built around your firm, supported by the person who built it.
               </p>
             </div>
           </div>

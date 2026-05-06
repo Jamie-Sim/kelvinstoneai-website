@@ -19,9 +19,9 @@ export default function WhatYouGet() {
               </svg>
             </div>
             <span className="wyg-num">01</span>
-            <h3>A lead qualification form on your website</h3>
+            <h3>A website that sells your craft</h3>
             <p>
-              A clean, mobile-friendly form that asks the right questions upfront — job type, location, scale, timeline. It screens out time-wasters before they ever reach you. Goes live on your existing site or a new one.
+              A clean, branded site built around your work — not a template. Mobile-first, fast, and structured so a homeowner sees the difference between you and the price-led competitor by the time they hit your contact form.
             </p>
           </div>
 
@@ -32,9 +32,9 @@ export default function WhatYouGet() {
               </svg>
             </div>
             <span className="wyg-num">02</span>
-            <h3>An instant WhatsApp alert — straight to your phone</h3>
+            <h3>Lead alerts straight to your phone</h3>
             <p>
-              The moment someone submits, you get a WhatsApp notification within 60 seconds. No logging in. No checking email. Just a plain-English summary: who they are, what the job is, where, and how urgent. You&apos;re always the first to know.
+              Every enquiry pings your phone within 60 seconds. Job type, location, scale, urgency — all summarised in plain English. You see it before the homeowner has messaged anyone else.
             </p>
           </div>
 
@@ -46,25 +46,23 @@ export default function WhatYouGet() {
               </svg>
             </div>
             <span className="wyg-num">03</span>
-            <h3>A clear verdict on every lead</h3>
+            <h3>A verdict on every enquiry, before you call</h3>
             <p>
-              Every notification includes a call-back recommendation based on job size, location, and budget. You make a decision in 10 seconds — not after a 20-minute back-and-forth with someone who had no budget to begin with.
+              Each lead arrives with a callback recommendation: pursue, qualify further, or skip. Your office stops triaging. Your estimator stops chasing tyre-kickers. The pipeline stays full of work worth winning.
             </p>
           </div>
 
           <div className="wyg-item reveal rd4">
             <div className="wyg-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <line x1="3" y1="9" x2="21" y2="9" />
-                <line x1="3" y1="15" x2="21" y2="15" />
-                <line x1="9" y1="3" x2="9" y2="21" />
+                <path d="M21 12a9 9 0 11-3-6.7L21 8" />
+                <polyline points="21 3 21 8 16 8" />
               </svg>
             </div>
             <span className="wyg-num">04</span>
-            <h3>Every lead logged, automatically</h3>
+            <h3>Follow-up that runs without you</h3>
             <p>
-              Every enquiry is saved in a simple shared spreadsheet — date, name, job type, outcome. Nothing disappears. You&apos;ll always know exactly what came in, what you pursued, and what you didn&apos;t.
+              Quotes that went cold get a polite nudge. Past customers get a check-in. Recent jobs get a review request. Done in your voice, off your CRM, without anyone having to remember.
             </p>
           </div>
         </div>

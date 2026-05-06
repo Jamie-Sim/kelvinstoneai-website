@@ -18,9 +18,9 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Kelvinstone AI — Never Miss a Lead Again",
+  title: "Kelvinstone AI — AI Growth Partner for UK Property Maintenance & Improvement Businesses",
   description:
-    "Kelvinstone AI — Done-for-you AI automation for UK businesses. Every enquiry captured, assessed, and on your phone in under 60 seconds.",
+    "Better websites, smarter follow-up, fewer missed jobs. Kelvinstone AI is the AI growth partner for UK property maintenance, renovation and improvement firms — built in Glasgow.",
 };
 
 export const viewport: Viewport = {

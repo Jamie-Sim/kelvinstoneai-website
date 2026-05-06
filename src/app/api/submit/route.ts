@@ -10,6 +10,7 @@ const REQUIRED_FIELDS = [
   "phone",
   "business_name",
   "business_type",
+  "team_size",
   "location",
 ] as const;
 
@@ -19,8 +20,8 @@ type LeadRow = {
   phone: string;
   business_name: string;
   business_type: string;
+  team_size: string;
   location: string;
-  estimated_budget: string | null;
   ideal_outcome: string | null;
   source: string;
 };
@@ -39,8 +40,8 @@ function buildEmailHtml(lead: LeadRow & { id: string; created_at: string }): str
     ["Phone", lead.phone],
     ["Business name", lead.business_name],
     ["Business type", lead.business_type],
+    ["Team size", lead.team_size],
     ["Location", lead.location],
-    ["Estimated budget", lead.estimated_budget ?? "—"],
     ["Ideal outcome", lead.ideal_outcome ?? "—"],
     ["Source", lead.source],
     ["Submitted at", lead.created_at],
@@ -64,6 +65,48 @@ function escapeHtml(input: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+// Form labels use en-dashes for readability; Airtable picklist uses hyphens.
+const TEAM_SIZE_TO_AIRTABLE: Record<string, string> = {
+  "Just me": "Just me",
+  "2 – 5": "2-5",
+  "6 – 15": "6-15",
+  "16 – 50": "16-50",
+  "50+": "50+",
+};
+
+async function postToAirtable(
+  lead: LeadRow,
+  env: { token: string; baseId: string; tableId: string },
+): Promise<void> {
+  const teamSizeChoice = TEAM_SIZE_TO_AIRTABLE[lead.team_size] ?? lead.team_size;
+  const fields: Record<string, unknown> = {
+    "Name": lead.name,
+    "Email": lead.email,
+    "Phone Number": lead.phone,
+    "Business Name": lead.business_name,
+    "Business Type": lead.business_type,
+    "Team Size": [teamSizeChoice],
+    "Location": lead.location,
+  };
+  if (lead.ideal_outcome) fields["Ideal Outcome"] = lead.ideal_outcome;
+
+  const res = await fetch(
+    `https://api.airtable.com/v0/${env.baseId}/${env.tableId}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ fields }),
+    },
+  );
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`Airtable POST ${res.status}: ${body}`);
+  }
 }
 
 export async function POST(request: Request) {
@@ -97,8 +140,8 @@ export async function POST(request: Request) {
     phone: required.phone!,
     business_name: required.business_name!,
     business_type: required.business_type!,
+    team_size: required.team_size!,
     location: required.location!,
-    estimated_budget: pickString(payload, "estimated_budget"),
     ideal_outcome: pickString(payload, "ideal_outcome"),
     source: "kelvinstone.ai",
   };
@@ -147,6 +190,23 @@ export async function POST(request: Request) {
     }
   } else {
     console.warn("[/api/submit] Resend env vars missing — skipping notification email");
+  }
+
+  const airtableToken = process.env.AIRTABLE_TOKEN;
+  const airtableBase = process.env.AIRTABLE_BASE_ID;
+  const airtableTable = process.env.AIRTABLE_TABLE_ID;
+  if (airtableToken && airtableBase && airtableTable) {
+    try {
+      await postToAirtable(lead, {
+        token: airtableToken,
+        baseId: airtableBase,
+        tableId: airtableTable,
+      });
+    } catch (err) {
+      console.error("[/api/submit] Airtable write failed", err);
+    }
+  } else {
+    console.warn("[/api/submit] Airtable env vars missing — skipping CRM sync");
   }
 
   return NextResponse.json({ ok: true });

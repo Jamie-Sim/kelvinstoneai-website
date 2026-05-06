@@ -105,24 +105,24 @@ export default function Hero() {
         <div className="hero-dateline reveal">
           <span className="hero-dateline-rule"></span>
           <span className="hero-dateline-text">
-            UK Businesses &nbsp;·&nbsp; AI Automation Agency
+            UK Property Maintenance &amp; Improvement &nbsp;·&nbsp; Built in Glasgow
           </span>
           <span className="hero-dateline-rule"></span>
         </div>
 
         <h1 className="hero-h1 reveal rd1">
-          Your next customer<br />won&apos;t wait. <em>Neither should you.</em>
+          AI-powered growth partner for UK<br /><em>property maintenance and improvement businesses.</em>
         </h1>
 
         <div className="hero-accent-rule reveal rd2"></div>
 
         <p className="hero-sub reveal rd2">
-          We build done-for-you lead capture systems that assess every enquiry and send it straight to your phone in under 60 seconds — so you&apos;re always first to respond, even when you&apos;re on the job.
+          Better websites, smarter follow-up, fewer missed jobs — built around how property maintenance and improvement firms actually win and keep work.
         </p>
 
         <div className="hero-ctas reveal rd3">
           <a href="#cta" className="btn-terra">
-            See Where You&apos;re Losing Leads
+            Find Where You&apos;re Losing Work
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
           </a>
           <a href="#process" className="btn-outline">
@@ -135,19 +135,19 @@ export default function Hero() {
       <div className="hero-stats reveal rd4">
         <div className="stat-block">
           <span className="stat-value">60 sec</span>
-          <span className="stat-label">Enquiry to phone<br />notification</span>
+          <span className="stat-label">Enquiry to<br />your phone</span>
         </div>
         <div className="stat-block">
           <span className="stat-value">14 days</span>
-          <span className="stat-label">From audit call<br />to fully live</span>
+          <span className="stat-label">Audit call to<br />live system</span>
         </div>
         <div className="stat-block">
           <span className="stat-value">£0</span>
-          <span className="stat-label">Setup cost if we<br />miss the deadline</span>
+          <span className="stat-label">Setup if we<br />miss the deadline</span>
         </div>
       </div>
       <p className="hero-stats-tagline reveal rd5">
-        Built for UK businesses. No tech knowledge needed. Live in a week — guaranteed.
+        Built for UK property maintenance and improvement firms. Glasgow-based. UK-wide. Live in a fortnight — guaranteed.
       </p>
     </section>
   );

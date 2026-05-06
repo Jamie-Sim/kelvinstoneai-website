@@ -1,26 +1,7 @@
 const benefits = [
   {
-    title: "Never miss an enquiry again",
-    body: "Every enquiry through your website is captured, assessed, and on your phone within 60 seconds — no matter what you're doing or where you are.",
-    icon: (
-      <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-    ),
-  },
-  {
-    title: "Built around your business",
-    body: "Your phone number, your form, your workflow. We fit around you — not the other way round.",
-    icon: (
-      <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Pays for itself fast",
-    body: "One additional job a month covers your monthly fee several times over. Most clients see that happen within the first 30 days.",
+    title: "Stop leaking quote-stage revenue",
+    body: "Every quote you send gets a follow-up sequence. Cold leads warm up. The work that was already yours stops walking across the road to the firm with the better admin.",
     icon: (
       <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <line x1="12" y1="1" x2="12" y2="23" />
@@ -29,17 +10,37 @@ const benefits = [
     ),
   },
   {
-    title: "Fully done for you",
-    body: "You don't touch a line of code or log in to anything new. We set it up, you review it, we launch it. Technical knowledge not required — or helpful.",
+    title: "Reactivate the customers you already won",
+    body: "Last year's kitchen client is this year's bathroom job. We rebuild the bridge to past work so repeat revenue stops being accidental.",
     icon: (
       <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        <path d="M21 12a9 9 0 11-3-6.7L21 8" />
+        <polyline points="21 3 21 8 16 8" />
       </svg>
     ),
   },
   {
-    title: "Know the job before you call",
-    body: "Every lead comes with a qualification summary — job type, budget, urgency. You go into every call informed, not guessing.",
+    title: "Built around your existing setup",
+    body: "Your phone numbers, your CRM, your team's diary, your tone of voice. We fit around your operation — your office manager doesn't learn a single new piece of software.",
+    icon: (
+      <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+  },
+  {
+    title: "First to reply, every time",
+    body: "60-second alerts mean you call back before the homeowner finishes phoning round. Speed wins the work — every time.",
+    icon: (
+      <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+  },
+  {
+    title: "A clear verdict on every lead",
+    body: "Every enquiry arrives qualified — job type, scale, urgency. You stop guessing. Your estimator stops wasting half-days on jobs that were never going to land.",
     icon: (
       <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M9 11l3 3L22 4" />
@@ -48,8 +49,8 @@ const benefits = [
     ),
   },
   {
-    title: "UK-based, real support",
-    body: "Not a faceless help desk. You deal directly with the person who built your system — someone who understands how UK businesses operate.",
+    title: "One person, real support",
+    body: "You deal directly with the person who built your system — not a help desk in a different timezone. Glasgow-based, UK-focused, available.",
     icon: (
       <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
@@ -66,10 +67,10 @@ export default function Benefits() {
         <div className="reveal section-head-center">
           <span className="section-label">Why It Works</span>
           <h2 className="section-h2">
-            Designed around<br /><em>how you actually work</em>
+            Designed around<br /><em>how your firm actually runs</em>
           </h2>
           <p className="section-intro">
-            Not a generic SaaS tool you have to figure out. A system built around your business, your number, and how your day actually runs.
+            Not a generic SaaS tool you have to bend your business into. A set of systems built around your team, your CRM, your day.
           </p>
         </div>
 
@@ -83,7 +84,7 @@ export default function Benefits() {
           ))}
         </div>
         <p className="benefits-tagline reveal rd2">
-          We fit around your business — not the other way around.
+          We fit around your firm — not the other way around.
         </p>
       </div>
     </section>

@@ -2,17 +2,17 @@ const steps = [
   {
     n: 1,
     title: "20-Minute Audit Call",
-    body: "We look at how enquiries currently reach you, where you're losing good jobs, and confirm exactly what needs to be built. Free, no obligation, and useful even if you don't go ahead.",
+    body: "We look at how leads currently reach you, where the gaps are between enquiry and signed quote, and what's worth building. Free, no obligation, useful even if you don't go ahead.",
   },
   {
     n: 2,
-    title: "We Build Everything For You",
-    body: "We set up your qualification form and connect it directly to your phone. No DIY, no technical knowledge, no back-and-forth. If you need a website too, we build that as well.",
+    title: "We Build Around Your Business",
+    body: "Brand, copy, forms, CRM connections, follow-up flows. We do the lot. You review at one or two checkpoints — no DIY, no support tickets, no learning new software.",
   },
   {
     n: 3,
-    title: "Go Live — and Start Winning More Work",
-    body: "From the moment you're live, every enquiry is assessed and on your phone within 60 seconds. You'll know who's enquiring, what they need, and whether it's worth picking up the phone — before you even call.",
+    title: "Go Live, Stay Supported",
+    body: "Within 14 days of the audit call, your systems are live and earning. Changes, fixes and tweaks handled by the same person who built it — picks up the phone when something needs sorting.",
   },
 ];
 
@@ -23,10 +23,10 @@ export default function Process() {
         <div className="reveal section-head-center">
           <span className="section-label">How It Works</span>
           <h2 className="section-h2">
-            Live and capturing leads<br /><em>in under a week</em>
+            Live and earning<br /><em>in under a fortnight</em>
           </h2>
           <p className="section-intro">
-            No lengthy onboarding. No back-and-forth. You talk to us once, we build it, you approve it, we launch it.
+            No three-month onboarding. No agency handoffs. You talk to us once, we build it around your business, you approve it, we launch it.
           </p>
         </div>
 
