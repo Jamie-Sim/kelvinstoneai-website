@@ -34,6 +34,7 @@ export default function Navbar() {
         <li><a href="/#process">Process</a></li>
         <li><a href="/#benefits">Why Us</a></li>
         <li><a href="/resources">Resources</a></li>
+        <li><a href="/blog">Blog</a></li>
       </ul>
       <a href="/#cta" className="nav-cta">Get a Free Audit</a>
     </nav>
