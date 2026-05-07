@@ -49,7 +49,6 @@ export default async function BlogIndex() {
               Short, practical pieces on what AI is doing to small businesses
               right now — what&rsquo;s worth your time, what isn&rsquo;t, and how
               property maintenance and improvement firms are putting it to use.
-              No hype.
             </p>
           </div>
         </section>
