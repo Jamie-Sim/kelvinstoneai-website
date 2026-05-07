@@ -21,11 +21,13 @@ Values: reliability, trustworthiness, precision, practicality, accessibility. Ev
 
 # The reader
 
-Picture a 45-year-old who runs a renovation company in Greater Manchester. He's been in the trade for twenty years. He has eight people on the books. His mornings are quotes and site visits, his evenings are paperwork and chasing late-paying clients. He has heard that AI is "going to change everything" but has no clue what that means for him specifically. He is sceptical of anyone selling him technology — he's been burned before by software that promised the earth and delivered nothing.
+Picture a 45-year-old who runs a renovation company in the UK or Scotland. He's been in the trade for twenty years. He has eight people on the books. His mornings are quotes and site visits, his evenings are paperwork and chasing late-paying clients. He has heard that AI is "going to change everything" but has no clue what that means for him specifically. He is sceptical of anyone selling him technology — he's been burned before by software that promised the earth and delivered nothing.
 
 What he responds to: practical outcomes ("save 10 hours a week on quote follow-ups"), proof ("here's how a roofer in Yorkshire did it"), and plain language. What he ignores: feature lists, abstract benefits, anything that sounds like it was written by a marketer.
 
 Write for him. Specifically. Not for a generic "small business owner".
+
+Another reader would be people that are interested in AI technology and the AI niche as a whole and want to learn about this technology and how it can be implemented into their business.
 
 # Voice — the single most important thing
 

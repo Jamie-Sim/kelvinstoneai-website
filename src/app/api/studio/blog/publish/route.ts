@@ -100,6 +100,24 @@ export async function POST(request: Request) {
     .update({ status: "published" })
     .eq("id", gen.id);
 
+  // Auto-promote the published body to a voice sample so future generations
+  // learn from Jamie's actual shipped voice. Best-effort — failures don't
+  // block the publish.
+  try {
+    const sampleText = `${content.title}\n\n${content.excerpt}\n\n${content.body_md}`;
+    await supabase.from("studio_voice_samples").insert({
+      label: `Published: ${content.title}`.slice(0, 200),
+      sample_text: sampleText,
+      source_kind: "published_blog",
+      source_id: inserted.id,
+    });
+  } catch (err) {
+    console.error(
+      "[/api/studio/blog/publish] voice sample auto-promote failed",
+      err,
+    );
+  }
+
   revalidatePath("/blog");
   revalidatePath(`/blog/${inserted.slug}`);
 

@@ -106,6 +106,7 @@ export async function POST(request: Request) {
       format,
       status: "draft",
       content: result.content,
+      original_content: result.content,
       model: result.metadata.model,
       cost_usd: result.metadata.costUsd,
       image_url: carryImageUrl,

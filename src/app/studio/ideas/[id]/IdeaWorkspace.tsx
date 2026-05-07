@@ -167,6 +167,8 @@ function GenerationPanel({
   const [imagePrompt, setImagePrompt] = useState(generation.image_prompt ?? "");
   const [imageRefineNote, setImageRefineNote] = useState("");
   const [localError, setLocalError] = useState<string | null>(null);
+  const [savingExemplar, setSavingExemplar] = useState(false);
+  const [exemplarSaved, setExemplarSaved] = useState(false);
 
   async function publishBlog() {
     setPublishing(true);
@@ -245,6 +247,28 @@ function GenerationPanel({
     else if (generation.format === "x_thread")
       text = (c.tweets as string[]).join("\n\n");
     navigator.clipboard.writeText(text);
+  }
+
+  async function saveAsExemplar() {
+    setSavingExemplar(true);
+    setLocalError(null);
+    const res = await fetch("/api/studio/voice-samples/from-generation", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        generationId: generation.id,
+        // Send current panel content so any local tweaks are captured.
+        content: generation.content,
+      }),
+    });
+    const data = await res.json();
+    setSavingExemplar(false);
+    if (!res.ok) {
+      setLocalError(data.error ?? "Failed to save voice exemplar.");
+      return;
+    }
+    setExemplarSaved(true);
+    setTimeout(() => setExemplarSaved(false), 3000);
   }
 
   return (
@@ -355,6 +379,21 @@ function GenerationPanel({
         >
           Copy
         </button>
+        {generation.format !== "blog" && (
+          <button
+            type="button"
+            onClick={saveAsExemplar}
+            disabled={savingExemplar}
+            title="Save the current draft as a voice exemplar — future generations will learn from it."
+            className="rounded-md border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50"
+          >
+            {savingExemplar
+              ? "Saving…"
+              : exemplarSaved
+              ? "Saved ✓"
+              : "Save as voice exemplar"}
+          </button>
+        )}
         {generation.format === "blog" && (
           <button
             type="button"
