@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { AdminEditButton } from "@/components/blog/AdminEditButton";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import RevealObserver from "@/components/RevealObserver";
@@ -81,6 +82,7 @@ export default async function BlogPostPage({
     <>
       <RevealObserver />
       <Navbar />
+      <AdminEditButton href={`/studio/blog/${post.id}`} label="Edit post" />
       <main>
         <article className="blog-article">
           <div className="wrap-narrow">

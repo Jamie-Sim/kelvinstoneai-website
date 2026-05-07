@@ -1674,3 +1674,49 @@ footer.site-footer .wrap { position: relative; z-index: 1; }
   padding-bottom: 1px;
 }
 .blog-article-foot-text a:hover { color: var(--terra); }
+
+/* ============================================================
+   ADMIN EDIT BUTTON (floating, only visible to allow-listed admin)
+============================================================ */
+.admin-edit-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  box-shadow:
+    0 2px 6px rgba(24, 20, 34, 0.18),
+    0 8px 24px rgba(24, 20, 34, 0.22);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.15s ease;
+}
+.admin-edit-button:hover {
+  transform: translateY(-2px);
+  background: #2a2336;
+  box-shadow:
+    0 4px 10px rgba(24, 20, 34, 0.22),
+    0 12px 32px rgba(24, 20, 34, 0.28);
+}
+.admin-edit-button:active { transform: translateY(0); }
+.admin-edit-button svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+@media (max-width: 640px) {
+  .admin-edit-button {
+    bottom: 16px;
+    right: 16px;
+    padding: 9px 14px;
+    font-size: 0.72rem;
+  }
+}

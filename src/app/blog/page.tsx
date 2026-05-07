@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AdminEditButton } from "@/components/blog/AdminEditButton";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import RevealObserver from "@/components/RevealObserver";
@@ -35,6 +36,7 @@ export default async function BlogIndex() {
     <>
       <RevealObserver />
       <Navbar />
+      <AdminEditButton href="/studio" label="Studio" />
       <main>
         <section id="resources-intro">
           <div className="wrap-narrow intro-content">
