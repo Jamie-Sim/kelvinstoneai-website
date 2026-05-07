@@ -69,7 +69,9 @@ export default async function BlogIndex() {
                 <Link
                   key={post.id}
                   href={`/blog/${post.slug}`}
-                  className={`blog-card reveal rd${(i % 4) + 1}`}
+                  className={`blog-card${
+                    post.hero_image_url ? "" : " blog-card--text"
+                  } reveal rd${(i % 4) + 1}`}
                 >
                   {post.hero_image_url && (
                     /* eslint-disable-next-line @next/next/no-img-element */
@@ -81,6 +83,9 @@ export default async function BlogIndex() {
                     />
                   )}
                   <div className="blog-card-body">
+                    {!post.hero_image_url && (
+                      <span className="blog-card-eyebrow">Essay</span>
+                    )}
                     <p className="blog-card-meta">
                       {new Date(post.published_at).toLocaleDateString("en-GB", {
                         day: "numeric",

@@ -1461,9 +1461,47 @@ footer.site-footer .wrap { position: relative; z-index: 1; }
   color: var(--blue);
 }
 
+/* Text-only card variant — when a published post has no hero image.
+   Treated as an editorial / essay card: bigger serif title, parchment
+   tint, terra accent rule. Signals "this is a piece of writing" rather
+   than "this lost its image". */
+.blog-card--text {
+  background: var(--parchment-mid);
+}
+.blog-card--text .blog-card-body {
+  padding: var(--sp-6) var(--sp-5);
+  gap: 12px;
+  position: relative;
+}
+.blog-card--text .blog-card-body::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--terra);
+  margin-bottom: 6px;
+}
+.blog-card-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terra);
+}
+.blog-card--text .blog-card-title {
+  font-size: 1.85rem;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+.blog-card--text .blog-card-excerpt {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
 @media (max-width: 720px) {
   .blog-grid { grid-template-columns: 1fr; }
   .blog-card-title { font-size: 1.3rem; }
+  .blog-card--text .blog-card-title { font-size: 1.55rem; }
 }
 
 /* ============================================================
