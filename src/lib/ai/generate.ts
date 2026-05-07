@@ -63,6 +63,8 @@ export type GenerateInput = {
   notes?: string | null;
   refineNote?: string | null;
   previousContent?: unknown;
+  /** Cached web-search-grounded research for this idea, if available. */
+  researchNotes?: string | null;
 };
 
 export type GenerateMetadata = {
@@ -151,6 +153,16 @@ function buildUserMessage(format: GenerationFormat, input: GenerateInput): strin
 
   if (input.notes && input.notes.trim()) {
     sections.push(`## Steering note from Jamie\n${input.notes.trim()}`);
+  }
+
+  if (
+    input.researchNotes &&
+    input.researchNotes.trim() &&
+    !/^\s*NO_RESEARCH_NEEDED/i.test(input.researchNotes)
+  ) {
+    sections.push(
+      `## Research notes (current factual context — use these as ground truth)\n${input.researchNotes.trim()}\n\nGround any factual claims in the post with these notes. If the source material contradicts these notes, prefer the notes (they're current).`,
+    );
   }
 
   if (input.refineNote && input.refineNote.trim()) {

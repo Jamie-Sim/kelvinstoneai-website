@@ -7,9 +7,10 @@ import {
   generateLinkedIn,
   generateXThread,
 } from "@/lib/ai/generate";
+import { researchIdea } from "@/lib/ai/research";
 
 export const runtime = "nodejs";
-export const maxDuration = 60;
+export const maxDuration = 120;
 
 type Body = {
   ideaId?: unknown;
@@ -51,7 +52,9 @@ export async function POST(request: Request) {
   const supabase = supabaseAdmin();
   const { data: idea, error: ideaError } = await supabase
     .from("ideas")
-    .select("id, source_type, raw_input, notes")
+    .select(
+      "id, source_type, source_url, raw_input, notes, research_notes, research_done_at",
+    )
     .eq("id", ideaId)
     .single();
   if (ideaError || !idea) {
@@ -59,6 +62,45 @@ export async function POST(request: Request) {
       { ok: false, error: "Idea not found." },
       { status: 404 },
     );
+  }
+
+  // Research the idea once on first generation; cache for all future formats
+  // and refines. Web search lives ONLY in the research call — generation
+  // calls keep strict structured output.
+  let researchNotes: string | null = idea.research_notes ?? null;
+  if (!idea.research_done_at) {
+    try {
+      const sourceLabel =
+        idea.source_type === "youtube"
+          ? `YouTube transcript${idea.source_url ? ` from ${idea.source_url}` : ""}`
+          : idea.source_type === "blog"
+          ? "Existing published blog post"
+          : "Brain-dump from Jamie";
+      const research = await researchIdea({
+        rawInput: idea.raw_input,
+        sourceLabel,
+      });
+      researchNotes = research.notes;
+      await supabase
+        .from("ideas")
+        .update({
+          research_notes: research.notes,
+          research_done_at: new Date().toISOString(),
+          research_cost_usd: research.costUsd,
+        })
+        .eq("id", ideaId);
+    } catch (err) {
+      console.error("[/api/studio/generate] research failed — continuing without", err);
+      // Mark research as attempted so we don't keep retrying. Save a marker.
+      await supabase
+        .from("ideas")
+        .update({
+          research_notes: `RESEARCH_FAILED: ${(err as Error).message}`,
+          research_done_at: new Date().toISOString(),
+        })
+        .eq("id", ideaId);
+      researchNotes = null;
+    }
   }
 
   let previousContent: unknown = undefined;
@@ -84,6 +126,7 @@ export async function POST(request: Request) {
     notes: idea.notes,
     refineNote,
     previousContent,
+    researchNotes,
   };
 
   let result;

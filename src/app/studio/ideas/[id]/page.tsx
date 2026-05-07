@@ -74,6 +74,29 @@ export default async function IdeaDetailPage({
           )}
         </details>
 
+        {idea.research_done_at && (
+          <details className="mt-3 rounded-2xl border border-slate-200 bg-white p-4">
+            <summary className="cursor-pointer text-sm font-medium text-slate-700">
+              {idea.research_notes?.startsWith("NO_RESEARCH_NEEDED")
+                ? "Web research · skipped (personal anecdote)"
+                : idea.research_notes?.startsWith("RESEARCH_FAILED")
+                ? "Web research · failed"
+                : `Web research · grounded${
+                    idea.research_cost_usd
+                      ? ` · $${Number(idea.research_cost_usd).toFixed(3)}`
+                      : ""
+                  }`}
+            </summary>
+            <pre className="mt-3 max-h-96 overflow-auto whitespace-pre-wrap rounded-md bg-slate-50 p-3 text-xs text-slate-700">
+              {idea.research_notes ?? "(no notes)"}
+            </pre>
+            <p className="mt-2 text-[11px] text-slate-400">
+              Research runs once per idea on first generation. Reused for every
+              format and refine on the same idea — no extra search cost.
+            </p>
+          </details>
+        )}
+
         <IdeaWorkspace
           ideaId={idea.id}
           initialGenerations={generations ?? []}
