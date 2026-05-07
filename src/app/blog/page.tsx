@@ -40,16 +40,16 @@ export default async function BlogIndex() {
           <div className="wrap-narrow intro-content">
             <div className="section-label reveal">Blog</div>
             <h1 className="intro-h1 reveal rd1">
-              Thinking out loud
+              What we&rsquo;re thinking about
               <br />
-              <em>about AI.</em>
+              <em>in AI.</em>
             </h1>
             <div className="intro-accent-rule reveal rd2"></div>
             <p className="intro-sub reveal rd2">
-              Personal notes on what&rsquo;s happening in AI — what&rsquo;s
-              actually useful, what&rsquo;s noise, what&rsquo;s worth paying
-              attention to. Plenty of it lands on the trades and property side,
-              since that&rsquo;s the world I work in. Not all of it does.
+              Notes on what&rsquo;s happening in AI — what&rsquo;s actually
+              useful, what&rsquo;s noise, what&rsquo;s worth paying attention to.
+              Plenty of it lands on the trades and property side, since
+              that&rsquo;s the world we work in. Not all of it does.
             </p>
           </div>
         </section>
