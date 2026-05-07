@@ -111,13 +111,13 @@ export default function Hero() {
         </div>
 
         <h1 className="hero-h1 reveal rd1">
-          AI-powered growth partner for UK<br /><em>property maintenance and improvement businesses.</em>
+          Practical AI for UK<br /><em>property businesses.</em>
         </h1>
 
         <div className="hero-accent-rule reveal rd2"></div>
 
         <p className="hero-sub reveal rd2">
-          Better websites, smarter follow-up, fewer missed jobs — built around how property maintenance and improvement firms actually win and keep work.
+          Better websites. Smarter follow-up. Fewer missed jobs.
         </p>
 
         <div className="hero-ctas reveal rd3">
