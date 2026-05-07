@@ -319,12 +319,12 @@ function GenerationPanel({
               <label className="block text-xs font-medium text-slate-700">
                 Refine image (edit the existing one)
               </label>
-              <input
-                type="text"
+              <textarea
                 value={imageRefineNote}
                 onChange={(e) => setImageRefineNote(e.target.value)}
+                rows={3}
                 placeholder="e.g. remove the USB stick, change wallpaper to deep blue"
-                className="block w-full rounded-md border border-slate-300 px-3 py-2 text-xs shadow-sm focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+                className="block w-full resize-y rounded-md border border-slate-300 px-3 py-2 text-xs shadow-sm focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
               />
               <p className="text-[11px] text-slate-500">
                 Keeps the same composition and style — only applies the change you describe.
@@ -346,12 +346,12 @@ function GenerationPanel({
         <label className="block text-xs font-medium text-slate-700">
           Refine text with a note
         </label>
-        <input
-          type="text"
+        <textarea
           value={refineNote}
           onChange={(e) => setRefineNote(e.target.value)}
+          rows={3}
           placeholder="e.g. punchier opening, less corporate"
-          className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-xs shadow-sm focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+          className="mt-1 block w-full resize-y rounded-md border border-slate-300 px-3 py-2 text-xs shadow-sm focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
         />
         <p className="mt-1 text-[11px] text-slate-400">
           Operates on the written copy only. To change the image, edit the
