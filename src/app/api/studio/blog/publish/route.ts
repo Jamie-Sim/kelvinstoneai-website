@@ -38,7 +38,7 @@ export async function POST(request: Request) {
   const supabase = supabaseAdmin();
   const { data: gen, error: genError } = await supabase
     .from("generations")
-    .select("id, format, content")
+    .select("id, format, content, image_url, image_prompt")
     .eq("id", generationId)
     .single();
   if (genError || !gen) {
@@ -82,6 +82,8 @@ export async function POST(request: Request) {
       excerpt: content.excerpt,
       body_md: content.body_md,
       meta_description: content.meta_description ?? content.excerpt,
+      hero_image_url: gen.image_url,
+      hero_image_prompt: gen.image_prompt,
       generation_id: gen.id,
       published_at: new Date().toISOString(),
     })
