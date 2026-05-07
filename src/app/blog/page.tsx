@@ -40,15 +40,16 @@ export default async function BlogIndex() {
           <div className="wrap-narrow intro-content">
             <div className="section-label reveal">Blog</div>
             <h1 className="intro-h1 reveal rd1">
-              Plain-English thinking on
+              Thinking out loud
               <br />
-              <em>AI for the trades.</em>
+              <em>about AI.</em>
             </h1>
             <div className="intro-accent-rule reveal rd2"></div>
             <p className="intro-sub reveal rd2">
-              Short, practical pieces on what AI is doing to small businesses
-              right now — what&rsquo;s worth your time, what isn&rsquo;t, and how
-              property maintenance and improvement firms are putting it to use.
+              Personal notes on what&rsquo;s happening in AI — what&rsquo;s
+              actually useful, what&rsquo;s noise, what&rsquo;s worth paying
+              attention to. Plenty of it lands on the trades and property side,
+              since that&rsquo;s the world I work in. Not all of it does.
             </p>
           </div>
         </section>
