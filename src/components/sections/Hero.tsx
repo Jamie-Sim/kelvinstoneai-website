@@ -139,7 +139,7 @@ export default function Hero() {
         </div>
         <div className="stat-block">
           <span className="stat-value">14 days</span>
-          <span className="stat-label">Audit call to<br />live system</span>
+          <span className="stat-label">Sign-off to<br />live system</span>
         </div>
         <div className="stat-block">
           <span className="stat-value">£0</span>

@@ -62,7 +62,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <a href="/#cta" className="nav-cta">Get a Free Audit</a>
+        <a href="/#cta" className="nav-cta">Discovery Call</a>
         <button
           type="button"
           className="nav-toggle"
@@ -91,7 +91,7 @@ export default function Navbar() {
           ))}
         </ul>
         <a href="/#cta" className="mobile-menu-cta" onClick={closeMenu}>
-          Get a Free Audit
+          Discovery Call
         </a>
       </div>
     </>

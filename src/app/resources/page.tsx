@@ -84,7 +84,7 @@ export default function ResourcesPage() {
 
             <p className="resources-foot reveal rd3">
               Want help putting any of this into practice?{" "}
-              <a href="/#cta">Get a free audit</a> — we&rsquo;ll look at
+              <a href="/#cta">Book a discovery call</a> — we&rsquo;ll look at
               your business and tell you where AI actually fits.
             </p>
           </div>

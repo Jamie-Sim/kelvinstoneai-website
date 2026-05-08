@@ -121,8 +121,8 @@ export default async function BlogPostPage({
               <p className="blog-article-foot-text">
                 If any of this is useful and you want to talk through how AI
                 might fit your business —{" "}
-                <Link href="/#cta">get a free audit</Link>. No pitch, just a
-                conversation.
+                <Link href="/#cta">book a discovery call</Link>. No pitch, just
+                a conversation.
               </p>
             </footer>
           </div>

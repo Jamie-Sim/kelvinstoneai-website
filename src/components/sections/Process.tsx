@@ -1,7 +1,7 @@
 const steps = [
   {
     n: 1,
-    title: "20-Minute Audit Call",
+    title: "20-Minute Discovery Call",
     body: "We look at how leads currently reach you, where the gaps are between enquiry and signed quote, and what's worth building. Free, no obligation, useful even if you don't go ahead.",
   },
   {
@@ -12,7 +12,7 @@ const steps = [
   {
     n: 3,
     title: "Go Live, Stay Supported",
-    body: "Within 14 days of the audit call, your systems are live and earning. Changes, fixes and tweaks handled by the same person who built it — picks up the phone when something needs sorting.",
+    body: "Within 14 days of sign-off, your systems are live and earning. Changes, fixes and tweaks handled by the same person who built it — picks up the phone when something needs sorting.",
   },
 ];
 
